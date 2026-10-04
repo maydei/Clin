@@ -1,0 +1,271 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(0.995 0.002 85);
+  --foreground: oklch(0.141 0.005 285.823);
+  --card: oklch(0.995 0.002 85);
+  --card-foreground: oklch(0.141 0.005 285.823);
+  --popover: oklch(0.995 0.002 85);
+  --popover-foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.852 0.199 91.936);
+  --primary-foreground: oklch(0.141 0.005 285.823);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --accent: oklch(0.94 0.006 85);
+  --accent-foreground: oklch(0.27 0.007 75);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.004 286.32);
+  --input: oklch(0.871 0.006 286.286);
+  --ring: oklch(0.6 0.025 75);
+  --warning: oklch(0.795 0.184 86.047);
+  --panel: oklch(0.975 0.003 85);
+  --canvas: oklch(0.955 0.003 85);
+  --radius: 0.5rem;
+}
+
+@keyframes presentation-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes presentation-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes presentation-slide-in-forward { from { opacity: 0; transform: translateX(8%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes presentation-slide-out-forward { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-8%); } }
+@keyframes presentation-slide-in-backward { from { opacity: 0; transform: translateX(-8%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes presentation-slide-out-backward { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(8%); } }
+@keyframes presentation-slide-up-in-forward { from { opacity: 0; transform: translateY(8%); } to { opacity: 1; transform: translateY(0); } }
+@keyframes presentation-slide-up-out-forward { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8%); } }
+@keyframes presentation-slide-up-in-backward { from { opacity: 0; transform: translateY(-8%); } to { opacity: 1; transform: translateY(0); } }
+@keyframes presentation-slide-up-out-backward { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(8%); } }
+
+.presentation-slide[data-transition="fade"][data-phase="incoming"] { animation: presentation-fade-in 300ms ease both; }
+.presentation-slide[data-transition="fade"][data-phase="outgoing"] { animation: presentation-fade-out 300ms ease both; }
+.presentation-slide[data-transition="slide"][data-phase="incoming"][data-direction="forward"] { animation: presentation-slide-in-forward 300ms ease both; }
+.presentation-slide[data-transition="slide"][data-phase="outgoing"][data-direction="forward"] { animation: presentation-slide-out-forward 300ms ease both; }
+.presentation-slide[data-transition="slide"][data-phase="incoming"][data-direction="backward"] { animation: presentation-slide-in-backward 300ms ease both; }
+.presentation-slide[data-transition="slide"][data-phase="outgoing"][data-direction="backward"] { animation: presentation-slide-out-backward 300ms ease both; }
+.presentation-slide[data-transition="slide-vertical"][data-phase="incoming"][data-direction="forward"] { animation: presentation-slide-up-in-forward 300ms ease both; }
+.presentation-slide[data-transition="slide-vertical"][data-phase="outgoing"][data-direction="forward"] { animation: presentation-slide-up-out-forward 300ms ease both; }
+.presentation-slide[data-transition="slide-vertical"][data-phase="incoming"][data-direction="backward"] { animation: presentation-slide-up-in-backward 300ms ease both; }
+.presentation-slide[data-transition="slide-vertical"][data-phase="outgoing"][data-direction="backward"] { animation: presentation-slide-up-out-backward 300ms ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .presentation-slide { animation-duration: 1ms !important; }
+}
+
+.dark {
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.852 0.199 91.936);
+  --primary-foreground: oklch(0.141 0.005 285.823);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --accent: oklch(0.29 0.008 85);
+  --accent-foreground: oklch(0.94 0.006 85);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.6 0.025 75);
+  --warning: oklch(0.852 0.199 91.936);
+  --panel: oklch(0.185 0.006 285.885);
+  --canvas: oklch(0.105 0.004 285.823);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-warning: var(--warning);
+  --color-panel: var(--panel);
+  --color-canvas: var(--canvas);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", sans-serif;
+  --font-mono: "Bahnschrift", "Cascadia Mono", monospace;
+}
+
+@layer base {
+  * { box-sizing: border-box; border-color: var(--border); }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-picking-color="true"],
+html[data-picking-color="true"] * {
+  cursor: crosshair !important;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  letter-spacing: 0;
+}
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+.canvas-root {
+  background-color: var(--canvas);
+  background-image: radial-gradient(color-mix(in oklab, var(--foreground) 10%, transparent) 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+[data-testid="tool-dock"] {
+  scrollbar-width: none;
+}
+
+[data-testid="tool-dock"]::-webkit-scrollbar {
+  display: none;
+}
+
+/* Quiet, theme-aware scrollbars shared by panels, fields and floating content. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--foreground) 25%, transparent) transparent;
+}
+
+.themed-scrollbar {
+  scrollbar-gutter: stable;
+}
+
+/* Chromium/WebKit allow a rounded thumb with a transparent inset. */
+@supports selector(::-webkit-scrollbar) {
+  * { scrollbar-width: auto; scrollbar-color: auto; }
+
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-corner { background: transparent; }
+  *::-webkit-scrollbar-thumb {
+    min-height: 32px;
+    min-width: 32px;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--foreground) 25%, transparent);
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--foreground) 40%, transparent);
+  }
+  *::-webkit-scrollbar-thumb:active {
+    background-color: color-mix(in oklab, var(--foreground) 55%, transparent);
+  }
+  *::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+}
+
+@media (forced-colors: active) {
+  * { scrollbar-color: auto; }
+  *::-webkit-scrollbar-thumb { background-color: ButtonText; }
+}
+
+::selection {
+  background: color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+@media (max-width: 640px) {
+  .editor-shell {
+    min-height: 460px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.search-highlight { background: oklch(0.86 0.17 90 / 35%); border-radius: 2px; mix-blend-mode: multiply; }
+.search-highlight[data-active="true"] { background: oklch(0.78 0.16 65 / 48%); outline: 1px solid oklch(0.6 0.15 65); }
+.editor-shell > header { min-height: 56px; }
+[data-testid="tool-dock"] { border-radius: 12px; box-shadow: 0 4px 20px oklch(0.2 0.005 85 / 10%); }
+[data-slot="dropdown-menu-item"], [data-slot="context-menu-item"] { gap: 0.625rem; }
+@media (max-width: 520px) { .editor-status > span:last-child { display: none; } }
+
+/* Presentation keeps a dark viewing surface and inherits the user's accent. */
+.presentation-surface {
+  --background: oklch(0.16 0.005 285);
+  --foreground: oklch(0.98 0.002 285);
+  --popover: oklch(0.22 0.006 285);
+  --popover-foreground: oklch(0.98 0.002 285);
+  --muted: oklch(0.28 0.006 285);
+  --muted-foreground: oklch(0.76 0.008 285);
+  --border: oklch(0.98 0.002 285 / 15%);
+  --input: oklch(0.98 0.002 285 / 20%);
+  --accent: color-mix(in oklab, var(--primary) 16%, var(--background));
+  --accent-foreground: var(--foreground);
+}
+
+/* Overlay chrome never resizes the document when temporarily revealed. */
+[data-view-edge][data-auto-hidden] { position: absolute; z-index: 45; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 140ms ease; }
+[data-view-edge="top"][data-auto-hidden] { top: 0; left: 0; right: 0; }
+[data-view-edge][data-auto-hidden][data-revealed] { visibility: visible; opacity: 1; pointer-events: auto; }
+.panel-resize { position: absolute; top: 0; bottom: 0; width: 10px; z-index: 5; cursor: col-resize; touch-action: none; }
+.panel-resize:hover, .panel-resize:focus-visible { background: color-mix(in srgb, var(--primary) 25%, transparent); outline: none; }
+.editor-header-center { display: flex; align-items: center; gap: 4px; margin-inline: auto; }
+@media (min-width: 1200px) { .editor-header-center { position: absolute; left: 50%; transform: translateX(-50%); } }
+.group-stack { transition: width 180ms ease, height 180ms ease; }
+@keyframes group-unfold { from { opacity: .45; scale: .98; } to { opacity: 1; scale: 1; } }
+.group-stack-preview { animation: group-unfold 180ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .group-stack, [data-view-edge] { transition: none !important; } .group-stack-preview { animation: none; } }
+
+.editor-status[hidden] { display: none; }
+
+/* Honor Windows text size for legacy pixel-sized labels as well as rem controls. */
+[class~="text-[9px]"] { font-size: calc(9px * var(--windows-text-scale, 1)); }
+[class~="text-[10px]"] { font-size: calc(10px * var(--windows-text-scale, 1)); }
+[class~="text-[11px]"] { font-size: calc(11px * var(--windows-text-scale, 1)); }
+[class~="text-[12px]"] { font-size: calc(12px * var(--windows-text-scale, 1)); }
+[class~="text-[13px]"] { font-size: calc(13px * var(--windows-text-scale, 1)); }
+[class~="text-[14px]"] { font-size: calc(14px * var(--windows-text-scale, 1)); }
+
+/* The top controls own the corners; lateral overlays never cover them. */
+[data-view-edge="top"][data-auto-hidden] { z-index: 48; }
+.touch-chrome-handle { display:none; position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:49; width:64px; height:20px; align-items:center; justify-content:center; border-radius:0 0 10px 10px; background:var(--background); }
+.touch-chrome-handle span { width:28px; height:4px; border-radius:4px; background:var(--muted-foreground); }
+@media (any-pointer: coarse) { .touch-chrome-handle { display:flex; } }
